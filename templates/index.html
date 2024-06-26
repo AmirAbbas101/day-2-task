@@ -4,72 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Item List</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .container {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 600px;
-        }
-        h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: #333;
-        }
-        #item-list .item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            border-bottom: 1px solid #eee;
-        }
-        #item-list .item:last-child {
-            border-bottom: none;
-        }
-        #item-list .item button {
-            background: #dc3545;
-            color: #fff;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-        #item-list .item button.edit {
-            background: #007bff;
-            margin-right: 5px;
-        }
-        input[type="text"] {
-            padding: 10px;
-            width: calc(100% - 100px);
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            margin-right: 10px;
-        }
-        button {
-            margin-top: 10px;
-            padding: 10px;
-            background: #28a745;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-        button:hover {
-            background: #218838;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div class="container">
@@ -80,7 +15,6 @@
     </div>
 
     <script>
-        // Fetch and display items
         async function fetchItems() {
             const response = await fetch('/items');
             const items = await response.json();
@@ -100,7 +34,6 @@
             });
         }
 
-        // Add a new item
         async function addItem() {
             const name = document.getElementById('item-name').value;
             const response = await fetch('/items', {
@@ -114,7 +47,6 @@
             }
         }
 
-        // Remove an item
         async function removeItem(id) {
             const response = await fetch(`/items/${id}`, { method: 'DELETE' });
             if (response.ok) {
@@ -122,7 +54,6 @@
             }
         }
 
-        // Edit an item
         async function editItem(id, currentName) {
             const newName = prompt('Enter new name', currentName);
             if (newName) {
@@ -137,7 +68,6 @@
             }
         }
 
-        // Initial fetch
         fetchItems();
     </script>
 </body>
